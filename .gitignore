@@ -1,0 +1,64 @@
+# ======================
+# Global / System files
+# ======================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# ======================
+# Python / Django (api)
+# ======================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+api/.venv/
+venv/
+ENV/
+env/
+
+# Django stuff:
+*.sqlite3
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3-journal
+
+# Django migrations (optional to include)
+api/**/migrations/*.pyc
+api/**/migrations/*.py
+api/**/migrations/__pycache__/
+
+# Environment variables
+api/.env
+
+# ======================
+# Node / React / Vite (ui)
+# ======================
+node_modules/
+ui/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Environment variables
+ui/.env
+.ui.env.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Misc
+.pnpm-debug.log*
