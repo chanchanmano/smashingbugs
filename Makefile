@@ -8,7 +8,7 @@ DOCKER_COMPOSE = docker-compose
 SERVICE_API = api
 SERVICE_DB = db
 PYTHON = python manage.py
-REQ_FILE = requirements.txt
+REQ_FILE = api/requirements.txt
 
 # ---------------------
 # CORE COMMANDS
@@ -100,7 +100,7 @@ format:
 # Refresh requirements.txt from inside container
 refresh-requirements:
 	$(DOCKER_COMPOSE) exec $(SERVICE_API) pip freeze > /tmp/requirements.txt
-	docker cp $$($(DOCKER_COMPOSE) ps -q $(SERVICE_API)):/tmp/requirements.txt ./$(REQ_FILE)
+	docker cp $$($(DOCKER_COMPOSE) ps -q $(SERVICE_API)):/tmp/requirements.txt ./api/requirements.txt
 	@echo "✅ Updated $(REQ_FILE) with container dependencies."
 
 # Install requirements from requirements.txt inside container
