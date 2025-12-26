@@ -31,7 +31,6 @@ env/
 
 # Django migrations (optional to include)
 api/**/migrations/*.pyc
-api/**/migrations/*.py
 api/**/migrations/__pycache__/
 
 # Environment variables

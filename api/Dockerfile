@@ -1,23 +1,26 @@
-# api/Dockerfile
+# Use Python 3.13 slim as base
 FROM python:3.13-slim
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies for PostgreSQL
-RUN apt-get update && apt-get install -y gcc libpq-dev && rm -rf /var/lib/apt/lists/*
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential libpq-dev curl netcat-traditional \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
+# Install pip deps
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all Django project files
+# Install debugpy (for VSCode attach)
+RUN pip install debugpy
+
+# Copy project files
 COPY . .
 
-# Expose Django port
-EXPOSE 8000
+# Expose ports
+EXPOSE 8000 5678
 
-# Run Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Default command: run with debugpy + autoreload
+CMD ["sh", "-c", "python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000 --nothreading"]
