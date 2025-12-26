@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import type { Organization } from "./types";
-import { getAvailableOrganizations } from "./helpers";
-import { OrganizationCombobox } from "./OrganizationCombobox"; // <-- use the new component
+import { getAvailableOrganizations, registerUser } from "./helpers";
+import { OrganizationCombobox } from "./OrganizationCombobox";
 
 const RegisterSchema = z.object({
   name: z.string().min(2, { message: "Enter your full name" }),
-  email: z.string().email({ message: "Please enter a valid email address" }), // <-- fixed
+  email: z.string().email({ message: "Please enter a valid email address" }),
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" }),
@@ -51,7 +51,7 @@ export function RegisterForm() {
   }, []);
 
   const onSubmit = (data: RegisterFormData) => {
-    console.log("Register data:", data);
+    registerUser(data)
   };
 
   return (
