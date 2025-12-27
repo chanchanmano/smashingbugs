@@ -43,21 +43,18 @@ export function OrganizationCombobox({
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
 
-  // read current form value
   const current: OrgValue = form.watch(namePath) ?? {};
   const selectedId = current?.id ? String(current.id) : undefined;
   const selectedName = current?.name || (selectedId
     ? organizations.find(o => String(o.id) === selectedId)?.name
     : "");
 
-  // filtered list (case-insensitive)
   const filtered = React.useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return organizations;
     return organizations.filter(o => o.name.toLowerCase().includes(q));
   }, [organizations, query]);
 
-  // should we show "Create ..."
   const showCreate =
     query.trim().length > 0 &&
     !organizations.some(o => o.name.toLowerCase() === query.trim().toLowerCase());
@@ -86,14 +83,12 @@ export function OrganizationCombobox({
     setQuery("");
   };
 
-  // keep input text in sync when external form value changes
+  
   React.useEffect(() => {
     if (selectedName && query !== selectedName) setQuery(selectedName);
     if (!selectedName && query) {
-      // allow stale query only if popover is open; otherwise clear to avoid confusion
       if (!open) setQuery("");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedName]);
 
   return (

@@ -19,8 +19,7 @@ export function LoginForm() {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    console.log("Login data:", data);
-    // call your backend API here
+    console.log(data)
   };
 
   return (

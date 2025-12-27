@@ -50,8 +50,9 @@ export function RegisterForm() {
     })();
   }, []);
 
-  const onSubmit = (data: RegisterFormData) => {
+  const onSubmit = async(data: RegisterFormData) => {
     registerUser(data)
+    form.reset()
   };
 
   return (
